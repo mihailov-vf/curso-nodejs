@@ -1,6 +1,9 @@
 module.exports = function (app) {
     app.get('/formulario_inclusao_noticia', function (req, res) {
-        res.render('admin/form_add_noticia');
+        res.render('admin/form_add_noticia', {
+            errors: {},
+            noticia: {}
+        });
     });
 
     app.post('/noticias/salvar', function (req, res) {
@@ -16,7 +19,10 @@ module.exports = function (app) {
 
         var errors = req.validationErrors();
         if (errors) {
-            res.render('admin/form_add_noticia');
+            res.render('admin/form_add_noticia', {
+                errors: errors,
+                noticia: noticia
+            });
             return;
         }
 

@@ -72,9 +72,7 @@
 	<div class="container">
 		<div class="row conversa" id="conversa">
 			<div class="col-md-1"></div>
-			<div class="col-md-10">
-
-			</div>
+			<div class="col-md-10" id="dialogos"> </div>
 			<div class="col-md-1"></div>
 
 		</div>
@@ -124,6 +122,16 @@
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
 		var socket = io('http://localhost:3000');
+
+		socket.on('msgParaCliente', function (data) {
+			var html = '';
+			html += '<div class="dialogo">';
+			html += '<h4>' + data.mensagem + '</h4>';
+			html += '<p>' + data.apelido + '</p>';
+			html += '</div>';
+
+			$('#dialogos').append(html);
+		});
 	</script>
 
 </body>

@@ -103,16 +103,15 @@
 	<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 		<div class="container">
 			<div class="panel-body campo-mensagem">
-				<form>
-					<div class="col-md-12">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Mensagem">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button">></button>
-							</span>
-						</div>
+				<div class="col-md-12">
+					<div class="input-group">
+						<input type="hidden" id="apelido" value="<%= dadosForm.apelido %>">
+						<input id="mensagem" type="text" class="form-control" placeholder="Mensagem">
+						<span class="input-group-btn">
+							<button id="enviarMensagem" class="btn btn-default" type="button">></button>
+						</span>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -126,11 +125,18 @@
 		socket.on('msgParaCliente', function (data) {
 			var html = '';
 			html += '<div class="dialogo">';
-			html += '<h4>' + data.mensagem + '</h4>';
-			html += '<p>' + data.apelido + '</p>';
+			html += '<h4>' + data.apelido + '</h4>';
+			html += '<p>' + data.mensagem + '</p>';
 			html += '</div>';
 
 			$('#dialogos').append(html);
+		});
+
+		$('#enviarMensagem').on('click', function () {
+			socket.emit('msgParaServidor', {
+				apelido: $('#apelido').val(),
+				mensagem: $('#mensagem').val()
+			});
 		});
 	</script>
 

@@ -117,7 +117,9 @@
 			html += '</div>';
 
 			$('#dialogos').append(html);
-			window.scrollTo(0, window.innerHeight);
+			$("html, body").animate({
+				scrollTop: $(document).height()
+			}, 400);
 		});
 
 		socket.on('participantesParaCliente', function (data) {
@@ -127,6 +129,12 @@
 			html += '</span>';
 
 			$('#pessoas').append(html);
+		});
+
+		$('#mensagem').on('keyup', function (event) {
+			if (event.key == 'Enter') {
+				$('#enviarMensagem').click();
+			}
 		});
 
 		$('#enviarMensagem').on('click', function () {

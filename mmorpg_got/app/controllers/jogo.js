@@ -3,7 +3,9 @@ module.exports.jogo = function (application, req, res) {
         res.redirect('/');
     }
 
-    res.render('jogo');
+    res.render('jogo', {
+        img_casa: req.session.casa
+    });
 };
 
 module.exports.sair = function (application, req, res) {

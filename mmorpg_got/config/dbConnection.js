@@ -1,17 +1,15 @@
-var mongo = require('mongodb');
+var MongoClient = require('mongodb').MongoClient;
 
-var connMongoDb = function () {
-    var db = new mongo.Db(
-        'got',
-        new mongo.Server(
-            'localhost',
-            27017
-        )
-    );
+module.exports.collection = function (collection, callback) {
+    var dbName = 'got';
+    var url = 'mongodb://localhost:27017';
 
-    return db;
-};
+    MongoClient.connect(url, {
+        useNewUrlParser: true
+    }, function (error, client) {
+        client.db(dbName).collection(collection, callback);
+        client.close();
 
-module.exports = function () {
-    return connMongoDb;
+        console.log(error);
+    });
 };

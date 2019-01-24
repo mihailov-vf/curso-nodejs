@@ -9,7 +9,5 @@ module.exports.collection = function (collection, callback) {
     }, function (error, client) {
         client.db(dbName).collection(collection, callback);
         client.close();
-
-        console.log(error);
     });
 };

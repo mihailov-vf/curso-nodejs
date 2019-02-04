@@ -1,6 +1,7 @@
 module.exports.jogo = function (application, req, res) {
     if (!req.session.autorizado) {
         res.redirect('/');
+        return;
     }
 
     var connection = application.config.dbConnection;
@@ -15,4 +16,12 @@ module.exports.sair = function (application, req, res) {
     req.session.destroy(function (error) {
         res.redirect('/');
     });
+};
+
+module.exports.suditos = function (application, req, res) {
+    res.render('aldeoes', {});
+};
+
+module.exports.pergaminhos = function (application, req, res) {
+    res.render('pergaminhos', {});
 };

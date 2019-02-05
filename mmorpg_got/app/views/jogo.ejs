@@ -36,6 +36,10 @@
 					}
 				});
 			});
+
+			$('#btn_suditos,#btn_pergaminho').on('click', function () {
+				$('#msg-erros').hide();
+			});
 		});
 	</script>
 
@@ -52,6 +56,12 @@
 	</nav>
 
 	<div class="container">
+
+		<% if(comando_invalido == 'S') { %>
+		<div class="alert alert-danger" id="msg-erros">
+			<strong>Operação inválida! Verifique se todos os campos foram informados</strong>
+		</div>
+		<% } %>
 
 		<div class="row">
 			<div class="col-sm-3 casa">

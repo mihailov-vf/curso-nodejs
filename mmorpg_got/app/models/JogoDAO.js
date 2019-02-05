@@ -16,14 +16,15 @@ JogoDAO.prototype.gerarParametros = function (usuario) {
     });
 };
 
-JogoDAO.prototype.iniciaJogo = function (res, usuario, casa) {
+JogoDAO.prototype.iniciaJogo = function (res, usuario, casa, comando_invalido) {
     this.connection.collection('jogo', function (error, collection) {
         collection.find({
             usuario: usuario
         }).toArray(function (error, result) {
             res.render('jogo', {
                 img_casa: casa,
-                jogo: result[0]
+                jogo: result[0],
+                comando_invalido: comando_invalido
             });
         });
     });

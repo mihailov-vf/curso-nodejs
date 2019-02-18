@@ -57,5 +57,9 @@ module.exports.acaoSudito = function (application, req, res) {
         return;
     }
 
-    res.send('Ok');
+    var connection = application.config.dbConnection;
+    var jogoDAO = new application.app.models.JogoDAO(connection);
+
+    dadosForm.usuario = req.session.usuario;
+    jogoDAO.acao(dadosForm);
 };

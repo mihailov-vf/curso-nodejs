@@ -30,6 +30,31 @@ JogoDAO.prototype.iniciaJogo = function (res, usuario, casa, comando_invalido) {
     });
 };
 
+JogoDAO.prototype.acao = function (acao) {
+    this.connection.collection('acao', function (error, collection) {
+        var tempo = (new Date()).getTime();
+        var hora = 60 * 60 * 1000;
+
+        switch (acao.acao) {
+            case 1:
+                tempo += 1 * hora;
+                break;
+            case 2:
+                tempo += 2 * hora;
+                break;
+            case 3:
+                tempo += 5 * hora;
+                break;
+            case 4:
+                tempo += 5 * hora;
+                break;
+        }
+
+        acao.termina_em = tempo;
+        collection.insertOne(acao);
+    });
+};
+
 module.exports = function () {
     return JogoDAO;
 };
